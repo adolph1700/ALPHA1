@@ -55,7 +55,11 @@ def tasks(command):
             #webbrowser.open_new_tab('http://www.google.com/%s' % j)
     #elif command==
 
-
-tasks(mycommand())
+while True:
+    my_command=mycommand()
+    if my_command!='stop':
+        tasks(my_command)
+    else:
+        break
 
 
