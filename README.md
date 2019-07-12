@@ -6,4 +6,9 @@ Install the dependencies in a virtual environment to avoid any issues. Use eithe
 Supported commands :
 open website
 
+send email
+
+search
+
+
 
