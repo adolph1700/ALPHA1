@@ -6,47 +6,13 @@ import datetime
 #from googlesearch import search 
 import webbrowser
 import smtplib
+from ALPHA1 import googlesearch,openwebsite,wishMe,speak,sendEmail
 
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
 engine.setProperty('voice', voices[0].id)
 
-def speak(audio):
-    print(audio)
-    engine.say(audio)
-    engine.runAndWait()
 
-def wishMe():
-    hour = int(datetime.datetime.now().hour)
-    if hour>=0 and hour<12:
-        speak("Good Morning!")
-
-    elif hour>=12 and hour<18:
-        speak("Good Afternoon!")
-
-    else:
-        speak("Good Evening!")
-
-    speak("I am Alpha.Can i be of any help to you?")
-
-def sendEmail(to, content):
-    server = smtplib.SMTP('smtp.gmail.com', 587)
-    server.ehlo()
-    server.starttls()
-    server.login('one.alpha1jarvis@gmail.com', 'Alpha12345')
-    server.sendmail('one.alpha1jarvis@gmail.com', to, content)
-    server.close()
-def googlesearch() :
-    chrome_path = r'C:\Program Files (x86)\Google\Chrome\Application\chrome.exe %s'
-    for url in search(query, tld="co.in", num=1, stop=1, pause=2):
-        webbrowser.open("https://google.com/search?q=%s" % query)
-
-def openwebsite():
-    speak("What is the name of the website")
-    website=takeCommand()
-    for site in search(website, tld="co.in", num=10, stop=1, pause=2): 
-        print(site)
-        webbrowser.open_new_tab('http://www.google.com/search?btnG=1&q=%s' % site)   
 #set a main class for the app frame
 class MyFrame(wx.Frame):
     def __init__(self):        
@@ -93,12 +59,12 @@ class MyFrame(wx.Frame):
 
 
 
-
     def OnEnter(self, event):
         input =self.txt.GetValue()
         input=input.lower()
-#         if input=='':
-#             query=self.takeCommand
+        # if input=='':
+        #     query=self.takeCommand
+     
         wishMe()
         #while True:
         print("If you are new here try asking what can you do")
