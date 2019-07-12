@@ -1,7 +1,7 @@
 import pyttsx3
 import speech_recognition as sr
 import datetime
-#from googlesearch import search 
+from googlesearch import search 
 import webbrowser
 import smtplib
 
@@ -11,7 +11,6 @@ engine.setProperty('voice', voices[0].id)
 
 
 def speak(audio):
-    print(audio)
     engine.say(audio)
     engine.runAndWait()
 
@@ -56,7 +55,7 @@ def sendEmail(to, content):
     server.ehlo()
     server.starttls()
     server.login('one.alpha1jarvis@gmail.com', 'Alpha12345')
-    server.sendmail('one.alpha1jarvis@gmail.com', 'one.alpha1jarvis@gmail.com', 'hi there')
+    server.sendmail('one.alpha1jarvis@gmail.com', 'one.alpha1jarvis@gmail.com', content)
     server.close()
 
 def googlesearch() :
@@ -72,17 +71,16 @@ def openwebsite():
     for site in search(website, tld="co.in", num=10, stop=1, pause=2): 
         print(site)
         webbrowser.open_new_tab('http://www.google.com/search?btnG=1&q=%s' % site)        
-        
-        
-if __name__ == "__main__": 
-    wishMe()
+
+def main():
     while True:
         print("If you are new here try asking what can you do")
         query = takeCommand().lower()
         if 'send email' in query:
             try:
                 speak("Please type the Email address of the receiver.")
-                to = input('Email : ')
+                #to = input('Email : ')
+                to=''
                 speak("What should I say?")
                 content = takeCommand()
                 sendEmail(to, content)
@@ -110,4 +108,8 @@ say command to view all the existing commands''')
 2. open website (To open a particular website) )
 3.send email (To send an email)
 4.stop (Ends the code)''')
-
+     
+        
+if __name__ == "__main__": 
+    wishMe()
+    main()
