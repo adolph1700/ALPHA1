@@ -78,10 +78,11 @@ def main():
         query = takeCommand().lower()
         if 'send email' in query:
             try:
-                speak("Please type the Email address of the receiver.")
+                #speak("Please type the Email address of the receiver.")
                 #to = input('Email : ')
                 to=''
                 speak("What should I say?")
+                print("What should I say?")
                 content = takeCommand()
                 sendEmail(to, content)
                 print("I have sent your Email.")
