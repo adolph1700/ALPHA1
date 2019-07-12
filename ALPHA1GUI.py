@@ -1,12 +1,11 @@
-''' Using wxPython'''
 import wx
 import pyttsx3
 import speech_recognition as sr
 import datetime
-#from googlesearch import search 
+from googlesearch import search 
 import webbrowser
 import smtplib
-from ALPHA1 import googlesearch,openwebsite,wishMe,speak,sendEmail
+from ALPHA1 import wishMe,main
 
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
@@ -34,77 +33,13 @@ class MyFrame(wx.Frame):
         my_sizer.Add(self.txt, 0, wx.ALL, 5)
         panel.SetSizer(my_sizer)
         self.Show()
-        #self.close()
+
     
-    def takeCommand():
-        r = sr.Recognizer()
-        with sr.Microphone() as source:
-            print("Listening...")
-            speak("Listening...")
-            r.pause_threshold = 1
-            audio = r.listen(source,timeout=1,phrase_time_limit=6)
-
-        try:
-            print('Recognizing...')
-            #speak("Recognizing...")
-            query = self.text.SetValue(r.recognize_google(audio, language='en-in'))
-            print(f"User said: {query}\n")
-            #speak(f"you said {query}")
-
-        except Exception as e:
-            print("Say that again please...")
-            #speak("Say that again please...")
-            return "None"
-        return query
-
-
-
     def OnEnter(self, event):
         input =self.txt.GetValue()
         input=input.lower()
-        # if input=='':
-        #     query=self.takeCommand
-     
         wishMe()
-        #while True:
-        print("If you are new here try asking what can you do")
-        query =self.txt.GetValue()
-        
-        query = query.lower()
-        if 'send email' in query:
-            try:
-                speak("Please type the Email address of the receiver.")
-                print("Email")
-                #to = self.txt.GetValue(takecommand()).lower()
-                self.txt.Bind(wx.EVT_TEXT_ENTER,self.OnEnter)
-                to=self.txt.GetValue()
-                speak("What should I say?")
-                content = self.txt.GetValue().lower()
-                sendEmail(to, content)
-                print("I have sent your Email.")
-            except Exception as e:
-                print(e)
-                speak("Sorry, Could not send this email.")
-                print("Sorry, Could not send this email.")
-
-        elif 'what can you do' in query:
-            speak('''I can do the following tasks
-1 send an Email
-2 open a website
-3 search on google ........
-say command to view all the existing commands''')
-        elif 'stop' in query:
-            speak("call me if you need")
-            #break
-        elif 'search' in query:
-            googlesearch()
-        elif 'open website' in query:
-            openwebsite()
-        elif 'command' in query:
-            print(''' 1.search (To search on google)
-2. open website (To open a particular website) )
-3.send email (To send an email)
-4.stop (Ends the code)''')
+        main()
 
 
 #run the app with the below code
