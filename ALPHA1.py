@@ -75,7 +75,14 @@ def openwebsite():
 def main():
     while True:
         print("If you are new here try asking what can you do")
-        query = takeCommand().lower()
+        input = takeCommand().lower()
+        tokens=word_tokenize(input)
+        stop_words = set(stopwords.words('english'))
+        clean_tokens = [w for w in tokens if not w in stop_words]
+        query=' '
+        query=query.join(clean_tokens)
+        if 'send email' in query:
+
         if 'send email' in query:
             try:
                 #speak("Please type the Email address of the receiver.")
