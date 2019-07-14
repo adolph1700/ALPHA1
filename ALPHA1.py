@@ -4,6 +4,15 @@ import datetime
 from googlesearch import search 
 import webbrowser
 import smtplib
+pairs = [
+    [
+        'how are you',"I'm great...What can I do for you"
+    ],
+    [
+        'hi',"Kon'nichiwa,that's hello in japanese !  How may I help"
+    ],
+
+]
 
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
@@ -73,9 +82,13 @@ def openwebsite():
         webbrowser.open_new_tab('http://www.google.com/search?btnG=1&q=%s' % site)        
 
 def main():
+   print("If you are new here try asking what can you do")
     while True:
-        print("If you are new here try asking what can you do")
         input = takeCommand().lower()
+        for i in range(len(pairs)):
+            if pairs[i][0] in query:
+                speak(pairs[i][1])
+                break
         tokens=word_tokenize(input)
         stop_words = set(stopwords.words('english'))
         clean_tokens = [w for w in tokens if not w in stop_words]
@@ -116,6 +129,8 @@ say command to view all the existing commands''')
 2. open website (To open a particular website) )
 3.send email (To send an email)
 4.stop (Ends the code)''')
+        else:
+            print("If you are new here try asking what can you do")
      
         
 if __name__ == "__main__": 
